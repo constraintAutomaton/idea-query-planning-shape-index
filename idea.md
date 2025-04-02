@@ -54,25 +54,33 @@ To improve discrimination in the assignment process, we could:
 - Check whether the shape $S$ in each $f_j$ subsumes the $GSP$.
 - Upon validation, assign $f_j$ to $tp$.
 
-#### Join assignation
+#### Join Assignment
 
-The line above have focused on the acquition of triple patterns and not on the join.
-Something similar and potentially more impactful can be done for the join.
+The previous section focused on the acquisition of triple patterns rather than the join operation. However, a similar and potentially more impactful optimization can be applied to joins.
 
-$\sigma_i \Join_k \sigma_j$ define the join between solution mapping $\sigma$ $i$ and $j$.
+The join between two solution mappings, $\sigma_i$ and $\sigma_j$, is defined as:
 
-Given that we have the $tp$s associated with the $\sigma$s and that those $tp$s are associated with $f_j$ 
+$$
+\sigma_i \Join_k \sigma_j
+$$
+
+Given that each solution mapping $\sigma$ is associated with a set of triple patterns ($tp$s), we introduce two related sets:  
+- **$prov$**: Represents the provenance of the triple, a set of $f$ elements indicating where-provenance.  
+- **$nFtp$**: Contains $f$ elements known to be **triple-pattern-irrelevant**.  
+
+If all elements of $prov$ are present in $nFtp$, then the join operation will produce no results and can be safely ignored.
 
 ### Current State
 
-- Each $f_j$ is indiscriminately assigned to every $tp$.
-- There's no visibility into which actual source each $tp$ is assigned.
-- The most performant version of LTQP relies on the aggregated store, but there is currently no method know the provenance of triples in the store.
-- There is no mechanism in place to adapt the query plan.
+- Each $f_j$ is assigned indiscriminately to every $tp$.  
+- There is no visibility into the actual source each $tp$ is assigned to.  
+- The most performant version of LTQP relies on the aggregated store, but there is currently no method to determine the provenance of triples within it.  
+- There is no mechanism to adapt the query plan dynamically.  
+
 
 ### Next Steps
 
-1. Implement a mechanism to assign sources to triple patterns in LTQP.
+1. Implement a mechanism to assign sources to triple patterns in LTQP and in intermediarrqueryy solutions (might already exist).
 2. Integrate source visualization within the LTQP physical plan.
 3. Manually create an optimal source assignment for comparison.
 4. Evaluate performance using SolidBench queries.
