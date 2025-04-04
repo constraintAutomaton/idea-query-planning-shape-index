@@ -80,7 +80,9 @@ If all elements of $prov$ are present in $nFtp$, then the join operation will pr
 
 ### Next Steps
 
-1. Implement a mechanism to assign sources to triple patterns in LTQP and in intermediarrqueryy solutions (might already exist).
+1. Implement a mechanism to assign sources to triple patterns in LTQP and in intermediary query solutions (might already exist).
+    - Maybe some sort of "virtual QuerySources"
+    - Being able to dynamically add QuerySources to join
 2. Integrate source visualization within the LTQP physical plan.
 3. Manually create an optimal source assignment for comparison.
 4. Evaluate performance using SolidBench queries.
